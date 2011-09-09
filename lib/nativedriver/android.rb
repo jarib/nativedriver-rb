@@ -1,0 +1,1 @@
+require 'nativedriver/android/bridge'
