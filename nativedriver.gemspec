@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Jari Bakken"]
   s.email       = ["jari.bakken@gmail.com"]
   s.homepage    = "http://code.google.com/p/nativedriver/"
-  s.summary     = %q{Native mobile application GUI automation}
+  s.summary     = %q{Native application GUI automation}
   s.description = %q{Ruby bindings for NativeDriver}
 
   s.rubyforge_project = "nativedriver"
