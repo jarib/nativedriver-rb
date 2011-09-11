@@ -7,10 +7,11 @@ describe NativeDriver do
       #
       # TODO: clean up + possibly automate device creation?
 
-      sh "adb logcat -c" # clear logs
-      sh "adb install -r #{apk}"
-      sh "adb shell am instrument com.google.android.testing.nativedriver.simplelayouts/com.google.android.testing.nativedriver.server.ServerInstrumentation"
-      sh "adb forward tcp:54129 tcp:54129"
+      sh "adb -e wait-for-device"
+      sh "adb -e logcat -c" # clear logs
+      sh "adb -e install -r #{apk}"
+      sh "adb -e shell am instrument com.google.android.testing.nativedriver.simplelayouts/com.google.android.testing.nativedriver.server.ServerInstrumentation"
+      sh "adb -e forward tcp:54129 tcp:54129"
 
       Selenium::WebDriver::Wait.new(:timeout => 5, :message => "waiting for Jetty to start").until do
         `adb logcat -d`.include? "Jetty started"
