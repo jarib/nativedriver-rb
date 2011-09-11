@@ -4,24 +4,16 @@ describe NativeDriver do
   context "Android" do
     before(:all) do
       # see http://code.google.com/p/nativedriver/wiki/GettingStartedAndroid
-      #
-      # TODO: clean up + possibly automate device creation?
-
-      sh "adb -e wait-for-device"
-      sh "adb -e logcat -c" # clear logs
-      sh "adb -e install -r #{apk}"
-      sh "adb -e shell am instrument com.google.android.testing.nativedriver.simplelayouts/com.google.android.testing.nativedriver.server.ServerInstrumentation"
-      sh "adb -e forward tcp:54129 tcp:54129"
-
-      Selenium::WebDriver::Wait.new(:timeout => 5, :message => "waiting for Jetty to start").until do
-        `adb logcat -d`.include? "Jetty started"
-      end
+      ensure_device_running
+      clear_logs
+      install_simplelayouts
+      instrument
+      tcp_forward 54129, 54129
+      wait_for_jetty
     end
 
-    after(:all) { driver.quit }
-
     let(:driver) { NativeDriver.for :android }
-    let(:apk)    { File.expand_path '../apks/simplelayouts.apk', __FILE__ }
+    after(:all) { driver.quit }
 
     context "text value activity" do
       before {
