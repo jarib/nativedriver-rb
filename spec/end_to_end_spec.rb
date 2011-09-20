@@ -79,13 +79,15 @@ describe NativeDriver do
   end
 
   context "iOS" do
+    # See http://code.google.com/p/nativedriver/wiki/GettingStartedIOS
+
+    let(:driver) { NativeDriver.for :ios }
+
     before(:all) do
       driver.manage.timeouts.implicit_wait = 10
     end
 
     after(:all) { driver.quit }
-
-    let(:driver) { NativeDriver.for :ios }
 
     context "Views" do
       it "sets text" do
