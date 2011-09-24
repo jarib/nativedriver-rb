@@ -1,10 +1,12 @@
 require 'selenium/webdriver'
 
 require 'nativedriver/version'
-require 'nativedriver/android'
-require 'nativedriver/ios'
 
 module NativeDriver
+
+  autoload :Android, 'nativedriver/android'
+  autoload :IOS,     'nativedriver/ios'
+
   def self.for(sym, opts = {})
     bridge = case sym.to_sym
              when :android
