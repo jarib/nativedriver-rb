@@ -9,8 +9,6 @@ module NativeDriverSpecHelper
       raise "command failed with code #{$?.exitstatus}: #{args.join ' '}"
     end
   end
-
-
 end
 
 RSpec.configure do |c|
